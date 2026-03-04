@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You're in — BWFT</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--blue:#3B82F6;--blue-light:#60A5FA;--blue-dark:#1D4ED8;--bg:#050810;--surface:#0D1117;--surface2:#0f1623;--border:rgba(255,255,255,0.07);--muted:#6B7280}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:#F9FAFB;overflow-x:hidden;min-height:100vh;display:flex;flex-direction:column}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 6%;height:64px;background:rgba(5,8,16,0.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+  .nav-logo{font-size:.98rem;font-weight:800}.nav-logo em{color:var(--blue-light);font-style:normal}
+  .nav-pill{background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.3);color:var(--blue-light);font-size:.7rem;font-weight:700;padding:.28rem .8rem;border-radius:50px;letter-spacing:.5px;text-transform:uppercase}
+  .hero{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:90px 6% 60px;position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;top:-150px;left:50%;transform:translateX(-50%);width:800px;height:800px;background:radial-gradient(circle,rgba(59,130,246,0.13) 0%,transparent 68%);pointer-events:none}
+  .badge{width:72px;height:72px;border-radius:50%;background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.3);display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 2rem;animation:pop .5s cubic-bezier(.175,.885,.32,1.275)}
+  @keyframes pop{0%{transform:scale(0);opacity:0}100%{transform:scale(1);opacity:1}}
+  .eyebrow{font-size:.7rem;font-weight:700;color:var(--blue-light);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:1.5rem;display:flex;align-items:center;justify-content:center;gap:.5rem}
+  .dot{width:6px;height:6px;border-radius:50%;background:var(--blue-light);animation:blink 1.8s infinite}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+  h1{font-size:clamp(2.4rem,5.5vw,4rem);font-weight:900;line-height:1.06;letter-spacing:-2px;max-width:700px;background:linear-gradient(140deg,#fff 45%,#93C5FD);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:1.2rem}
+  .sub{font-size:clamp(.93rem,1.8vw,1.05rem);color:var(--muted);max-width:440px;line-height:1.75;margin-bottom:2.8rem}
+  .sub strong{color:#CBD5E1;font-weight:600}
+  .cards{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;max-width:700px;margin-bottom:3rem}
+  .card{background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:1.4rem 1.2rem;flex:1;min-width:180px;max-width:220px;text-align:left}
+  .card-icon{font-size:1.4rem;margin-bottom:.7rem}
+  .card h3{font-size:.85rem;font-weight:700;margin-bottom:.35rem}
+  .card p{font-size:.78rem;color:var(--muted);line-height:1.55}
+  .btn{background:var(--blue);border:none;border-radius:10px;padding:.82rem 2rem;color:#fff;font-size:.9rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s,transform .15s,box-shadow .2s;box-shadow:0 0 28px rgba(59,130,246,.35);text-decoration:none;display:inline-block}
+  .btn:hover{background:var(--blue-dark);transform:translateY(-2px);box-shadow:0 0 40px rgba(59,130,246,.5)}
+  .btn-ghost{background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:10px;padding:.82rem 2rem;font-size:.9rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;text-decoration:none;display:inline-block}
+  .btn-ghost:hover{border-color:var(--blue);color:var(--blue-light)}
+  .actions{display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center}
+  footer{border-top:1px solid var(--border);padding:2.2rem 6%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+  .f-brand{font-size:.88rem;font-weight:800;color:var(--blue-light)}
+  .f-links{display:flex;gap:1.6rem}
+  .f-links a{color:var(--muted);text-decoration:none;font-size:.8rem;transition:color .2s}
+  .f-links a:hover{color:#fff}
+  .copy{width:100%;text-align:center;color:var(--muted);font-size:.74rem;padding-top:1.2rem;border-top:1px solid var(--border)}
+  @media(max-width:680px){.cards{flex-direction:column;align-items:center}.card{max-width:100%;width:100%}footer{flex-direction:column;text-align:center}.f-links{justify-content:center}.actions{flex-direction:column;align-items:center}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo"><em>Builder</em>WithFreeTime</div>
+  <div class="nav-pill">Early Access</div>
+</nav>
+
+<section class="hero">
+  <div class="badge">🚀</div>
+  <div class="eyebrow"><span class="dot"></span>You're in</div>
+  <h1>Welcome to the list.</h1>
+  <p class="sub">You'll be <strong>first to know</strong> when BWFT launches. Get ready to stop procrastinating and start building.</p>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon">⚡</div>
+      <h3>Micro-actions</h3>
+      <p>2-minute tasks designed to eliminate mental friction.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🏆</div>
+      <h3>XP & Leaderboard</h3>
+      <p>Every action earns XP. Climb the board, unlock rewards.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🤖</div>
+      <h3>AI Coach</h3>
+      <p>A full launch program built just for you. Always available.</p>
+    </div>
+  </div>
+
+  <div class="actions">
+    <a href="index.html" class="btn-ghost">← Back to site</a>
+  </div>
+</section>
+
+<footer>
+  <div class="f-brand">BuilderWithFreeTime</div>
+  <div class="f-links"><a href="index.html">Home</a><a href="#">About</a><a href="#">Privacy</a><a href="#">Contact</a></div>
+  <div class="copy">2026 BuilderWithFreeTime (BWFT) — Stop procrastinating. Start building.</div>
+</footer>
+
+</body>
+</html>
