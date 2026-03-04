@@ -21,25 +21,22 @@
   .dot{width:6px;height:6px;border-radius:50%;background:var(--blue-light);animation:blink 1.8s infinite}
   @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
   h1{font-size:clamp(2.4rem,5.5vw,4rem);font-weight:900;line-height:1.06;letter-spacing:-2px;max-width:700px;background:linear-gradient(140deg,#fff 45%,#93C5FD);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:1.2rem}
-  .sub{font-size:clamp(.93rem,1.8vw,1.05rem);color:var(--muted);max-width:440px;line-height:1.75;margin-bottom:2.8rem}
-  .sub strong{color:#CBD5E1;font-weight:600}
+  .hero-sub{font-size:clamp(.93rem,1.8vw,1.05rem);color:var(--muted);max-width:440px;line-height:1.75;margin-bottom:2.8rem}
+  .hero-sub strong{color:#CBD5E1;font-weight:600}
   .cards{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;max-width:700px;margin-bottom:3rem}
   .card{background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:1.4rem 1.2rem;flex:1;min-width:180px;max-width:220px;text-align:left}
   .card-icon{font-size:1.4rem;margin-bottom:.7rem}
   .card h3{font-size:.85rem;font-weight:700;margin-bottom:.35rem}
   .card p{font-size:.78rem;color:var(--muted);line-height:1.55}
-  .btn{background:var(--blue);border:none;border-radius:10px;padding:.82rem 2rem;color:#fff;font-size:.9rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s,transform .15s,box-shadow .2s;box-shadow:0 0 28px rgba(59,130,246,.35);text-decoration:none;display:inline-block}
-  .btn:hover{background:var(--blue-dark);transform:translateY(-2px);box-shadow:0 0 40px rgba(59,130,246,.5)}
   .btn-ghost{background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:10px;padding:.82rem 2rem;font-size:.9rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;text-decoration:none;display:inline-block}
   .btn-ghost:hover{border-color:var(--blue);color:var(--blue-light)}
-  .actions{display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center}
   footer{border-top:1px solid var(--border);padding:2.2rem 6%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
   .f-brand{font-size:.88rem;font-weight:800;color:var(--blue-light)}
   .f-links{display:flex;gap:1.6rem}
   .f-links a{color:var(--muted);text-decoration:none;font-size:.8rem;transition:color .2s}
   .f-links a:hover{color:#fff}
   .copy{width:100%;text-align:center;color:var(--muted);font-size:.74rem;padding-top:1.2rem;border-top:1px solid var(--border)}
-  @media(max-width:680px){.cards{flex-direction:column;align-items:center}.card{max-width:100%;width:100%}footer{flex-direction:column;text-align:center}.f-links{justify-content:center}.actions{flex-direction:column;align-items:center}}
+  @media(max-width:680px){.cards{flex-direction:column;align-items:center}.card{max-width:100%;width:100%}footer{flex-direction:column;text-align:center}.f-links{justify-content:center}}
 </style>
 </head>
 <body>
@@ -53,8 +50,7 @@
   <div class="badge">🚀</div>
   <div class="eyebrow"><span class="dot"></span>You're in</div>
   <h1>Welcome to the list.</h1>
-  <p class="sub">You'll be <strong>first to know</strong> when BWFT launches. Get ready to stop procrastinating and start building.</p>
-
+  <p class="hero-sub">You'll be <strong>first to know</strong> when BWFT launches. Get ready to stop procrastinating and start building.</p>
   <div class="cards">
     <div class="card">
       <div class="card-icon">⚡</div>
@@ -72,10 +68,7 @@
       <p>A full launch program built just for you. Always available.</p>
     </div>
   </div>
-
-  <div class="actions">
-    <a href="index.html" class="btn-ghost">← Back to site</a>
-  </div>
+  <a href="index.html" class="btn-ghost">← Back to site</a>
 </section>
 
 <footer>
