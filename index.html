@@ -122,15 +122,30 @@
          Formspree — emails arrivent dans ton dashboard formspree.io
          Redirige vers thank-you.html après soumission
          ============================================================ -->
-    <form action="https://formspree.io/f/mbdanpeb" method="POST">
-      <input type="hidden" name="_next" value="https://builderwithfreetime.github.io/acknoledgements/" />
-      <input type="hidden" name="_subject" value="New BWFT Early Access signup" />
-      <div class="input-row">
-        <input type="email" name="email" placeholder="your@email.com" required />
-        <button type="submit">Get Early Access</button>
-      </div>
-      <p class="form-note">Free to join. Be the first to know when we launch.</p>
-    </form>
+    <form id="ea-form">
+  <input type="hidden" name="_subject" value="New BWFT Early Access signup" />
+  <div class="input-row">
+    <input type="email" id="ea-email" name="email" placeholder="your@email.com" required />
+    <button type="submit">Get Early Access</button>
+  </div>
+  <p class="form-note">Free to join. Be the first to know when we launch.</p>
+</form>
+
+<script>
+document.getElementById('ea-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const email = document.getElementById('ea-email').value;
+  if (!email || !email.includes('@')) return;
+
+  await fetch('https://formspree.io/f/mbdanpeb', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({ email: email })
+  });
+
+  window.location.href = 'acknoledgements';
+});
+</script>
   </div>
 </section>
 
