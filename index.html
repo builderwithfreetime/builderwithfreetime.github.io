@@ -25,18 +25,13 @@
   .hero-sub{font-size:clamp(.93rem,1.8vw,1.1rem);color:var(--muted);margin:1.4rem 0 2.8rem;max-width:500px;line-height:1.75}
   .hero-sub strong{color:#CBD5E1;font-weight:600}
   .form-wrap{width:100%;max-width:470px;display:flex;flex-direction:column;align-items:center;gap:.7rem}
-  /* Formspree form styled to match site */
-  .form-wrap form{width:100%;display:flex;flex-direction:column;align-items:center;gap:.7rem}
-  .form-wrap .input-row{display:flex;width:100%;gap:.6rem}
-  .form-wrap input[type="email"]{flex:1;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:10px;padding:.82rem 1.1rem;color:#fff;font-size:.9rem;font-family:'Inter',sans-serif;outline:none;transition:border-color .2s}
-  .form-wrap input[type="email"]::placeholder{color:var(--muted)}
-  .form-wrap input[type="email"]:focus{border-color:rgba(59,130,246,.6)}
-  .form-wrap button[type="submit"]{background:var(--blue);border:none;border-radius:10px;padding:.82rem 1.4rem;color:#fff;font-size:.9rem;font-weight:700;cursor:pointer;white-space:nowrap;font-family:'Inter',sans-serif;transition:background .2s,transform .15s,box-shadow .2s;box-shadow:0 0 28px rgba(59,130,246,.35)}
-  .form-wrap button[type="submit"]:hover{background:var(--blue-dark);transform:translateY(-2px);box-shadow:0 0 40px rgba(59,130,246,.5)}
-  .form-wrap label{display:none}
-  .form-note{font-size:.73rem;color:var(--muted)}
+  .input-row{display:flex;width:100%;gap:.6rem}
+  .input-row input[type="email"]{flex:1;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:10px;padding:.82rem 1.1rem;color:#fff;font-size:.9rem;font-family:'Inter',sans-serif;outline:none;transition:border-color .2s}
+  .input-row input[type="email"]::placeholder{color:var(--muted)}
+  .input-row input[type="email"]:focus{border-color:rgba(59,130,246,.6)}
   .btn{background:var(--blue);border:none;border-radius:10px;padding:.82rem 1.4rem;color:#fff;font-size:.9rem;font-weight:700;cursor:pointer;white-space:nowrap;font-family:'Inter',sans-serif;transition:background .2s,transform .15s,box-shadow .2s;box-shadow:0 0 28px rgba(59,130,246,.35)}
   .btn:hover{background:var(--blue-dark);transform:translateY(-2px);box-shadow:0 0 40px rgba(59,130,246,.5)}
+  .form-note{font-size:.73rem;color:var(--muted)}
   hr{border:none;border-top:1px solid var(--border)}
   .stats{display:flex;justify-content:center;flex-wrap:wrap;border-bottom:1px solid var(--border)}
   .stat{flex:1;min-width:130px;padding:1.8rem 1rem;text-align:center;border-right:1px solid var(--border)}
@@ -94,7 +89,7 @@
   .f-links a:hover{color:#fff}
   .copy{width:100%;text-align:center;color:var(--muted);font-size:.74rem;padding-top:1.2rem;border-top:1px solid var(--border)}
   @media(max-width:900px){.grid4{grid-template-columns:repeat(2,1fr)}}
-  @media(max-width:680px){.nav-links{display:none}.form-wrap .input-row{flex-direction:column}.btn{width:100%}.split{flex-direction:column}.lb{max-width:100%;width:100%}footer{flex-direction:column;text-align:center}.f-links{justify-content:center}.grid4{grid-template-columns:1fr}}
+  @media(max-width:680px){.nav-links{display:none}.input-row{flex-direction:column}.btn{width:100%}.split{flex-direction:column}.lb{max-width:100%;width:100%}footer{flex-direction:column;text-align:center}.f-links{justify-content:center}.grid4{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -116,38 +111,15 @@
   <div class="eyebrow"><span class="dot"></span>Limited Early Access</div>
   <h1>Stop procrastinating.<br>Start building.</h1>
   <p class="hero-sub">BWFT turns entrepreneurship into an <strong>addictive game</strong>. AI-guided micro-actions, XP, and leaderboards — all from your phone.</p>
-
   <div class="form-wrap">
-    <!-- ============================================================
-         Formspree — emails arrivent dans ton dashboard formspree.io
-         Redirige vers thank-you.html après soumission
-         ============================================================ -->
-    <form id="ea-form">
-  <input type="hidden" name="_subject" value="New BWFT Early Access signup" />
-  <div class="input-row">
-    <input type="email" id="ea-email" name="email" placeholder="your@email.com" required />
-    <button type="submit">Get Early Access</button>
-  </div>
-  <p class="form-note">Free to join. Be the first to know when we launch.</p>
-</form>
-
-<script>
-document.getElementById('ea-form').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  const email = document.getElementById('ea-email').value;
-  if (!email || !email.includes('@')) return;
-
-  await fetch('https://formspree.io/f/mbdanpeb', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-    body: JSON.stringify({ email: email })
-  });
-
-  window.location.href = 'acknoledgements';
-});
-</script>
+    <div class="input-row">
+      <input type="email" id="e1" placeholder="your@email.com" />
+      <button class="btn" onclick="join()">Get Early Access</button>
+    </div>
+    <p class="form-note">Free to join. Be the first to know when we launch.</p>
   </div>
 </section>
+  
 
 <hr>
 
@@ -347,5 +319,19 @@ document.getElementById('ea-form').addEventListener('submit', async function(e) 
 
 -->
 
+<script>
+// ============================================================
+// Aucun service externe — redirige simplement vers thank-you.html
+// ============================================================
+function join() {
+  var el = document.getElementById('e1');
+  if (!el.value.trim() || !el.value.includes('@')) {
+    el.style.borderColor = '#F87171';
+    setTimeout(function(){ el.style.borderColor = ''; }, 1500);
+    return;
+  }
+  window.location.href = 'acknoledgements';
+}
+</script>
 </body>
 </html>
