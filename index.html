@@ -94,11 +94,9 @@
 </style>
 </head>
 <body>
+
 <!-- ============================================================
      EARLY ACCESS VERSION — live code below
-     ============================================================ -->
-<!-- ============================================================
-     EMAIL CAPTURE — maintenant via API Brevo (plus Netlify)
      ============================================================ -->
 
 <nav>
@@ -109,6 +107,7 @@
   </div>
   <div class="nav-pill">Early Access</div>
 </nav>
+
 <section class="hero">
   <div class="eyebrow"><span class="dot"></span>Limited Early Access</div>
   <h1>Stop procrastinating.<br>Start building.</h1>
@@ -122,13 +121,16 @@
     <p class="success" id="ok1">You're on the list. We'll reach out first.</p>
   </div>
 </section>
+
 <hr>
+
 <div class="stats">
   <div class="stat"><div class="stat-val">2 min</div><div class="stat-label">Per action</div></div>
   <div class="stat"><div class="stat-val">XP</div><div class="stat-label">Gamified progress</div></div>
   <div class="stat"><div class="stat-val">100%</div><div class="stat-label">Mobile-first</div></div>
   <div class="stat"><div class="stat-val">AI</div><div class="stat-label">Personal coach</div></div>
 </div>
+
 <section class="sec" id="how">
   <p class="lbl">Process</p>
   <h2 class="ttl">From zero to entrepreneur in 4 steps</h2>
@@ -140,6 +142,7 @@
     <div class="card"><div class="card-n">Step 04</div><h3>Earn XP, climb the board</h3><p>Every action earns XP. Unlock features, badges, and competitive advantages.</p></div>
   </div>
 </section>
+
 <section class="sec alt" id="features">
   <p class="lbl">Features</p>
   <h2 class="ttl">Built to kill procrastination.</h2>
@@ -155,6 +158,7 @@
     <div class="card"><h3>Community</h3><p>Connect with other builders, share wins, stay accountable. You are not building alone.</p></div>
   </div>
 </section>
+
 <section class="sec" id="leaderboard">
   <div class="split">
     <div class="split-t">
@@ -178,6 +182,7 @@
     </div>
   </div>
 </section>
+
 <footer>
   <div class="f-brand">BuilderWithFreeTime</div>
   <div class="f-links"><a href="#">Home</a><a href="#">About</a><a href="#">Privacy</a><a href="#">Contact</a></div>
@@ -189,8 +194,8 @@
      When launching the full app:
      1. Delete everything above this comment block (from <nav> to </footer>)
      2. Uncomment the code below (remove the opening and closing comment tags)
-     ============================================================ -->
-<!-- 
+     ============================================================
+
 <nav>
   <div class="nav-logo"><em>Builder</em>WithFreeTime</div>
   <div class="nav-links">
@@ -200,6 +205,7 @@
   </div>
   <button class="btn" style="font-size:.8rem;padding:.5rem 1.1rem" onclick="window.location='#download'">Get Started</button>
 </nav>
+
 <section class="hero">
   <div class="eyebrow"><span class="dot"></span>Now Available</div>
   <h1>Stop procrastinating.<br>Start building.</h1>
@@ -210,13 +216,16 @@
   </div>
   <p style="font-size:.73rem;color:var(--muted);margin-top:.9rem">Also available on Web — no install needed.</p>
 </section>
+
 <hr>
+
 <div class="stats">
   <div class="stat"><div class="stat-val">2 min</div><div class="stat-label">Per action</div></div>
   <div class="stat"><div class="stat-val">XP</div><div class="stat-label">Gamified progress</div></div>
   <div class="stat"><div class="stat-val">100%</div><div class="stat-label">Mobile-first</div></div>
   <div class="stat"><div class="stat-val">AI</div><div class="stat-label">Personal coach</div></div>
 </div>
+
 <section class="sec" id="how">
   <p class="lbl">Process</p>
   <h2 class="ttl">From zero to entrepreneur in 4 steps</h2>
@@ -228,6 +237,7 @@
     <div class="card"><div class="card-n">Step 04</div><h3>Earn XP, climb the board</h3><p>Every action earns XP. Unlock features, badges, and competitive advantages.</p></div>
   </div>
 </section>
+
 <section class="sec alt" id="features">
   <p class="lbl">Features</p>
   <h2 class="ttl">Built to kill procrastination.</h2>
@@ -243,6 +253,7 @@
     <div class="card"><h3>Community</h3><p>Connect with other builders, share wins, stay accountable. You are not building alone.</p></div>
   </div>
 </section>
+
 <section class="sec" id="leaderboard">
   <div class="split">
     <div class="split-t">
@@ -265,6 +276,7 @@
     </div>
   </div>
 </section>
+
 <section class="sec alt" id="pricing">
   <p class="lbl">Pricing</p>
   <h2 class="ttl">Start free. Scale when ready.</h2>
@@ -299,64 +311,65 @@
     </div>
   </div>
 </section>
+
 <footer>
   <div class="f-brand">BuilderWithFreeTime</div>
   <div class="f-links"><a href="#">Home</a><a href="#">About</a><a href="#">Pricing</a><a href="#">Privacy</a><a href="#">Contact</a></div>
   <div class="copy">2026 BuilderWithFreeTime (BWFT) — Stop procrastinating. Start building.</div>
 </footer>
+
 -->
 
 <script>
 // ============================================================
-// Envoi vers Brevo API – REMPLACE les deux lignes suivantes !
+// Brevo API — List ID: 9
+// REMPLACE "TA_NOUVELLE_CLE_BREVO" par ta vraie clé API Brevo
+// générée sur app.brevo.com > Paramètres > SMTP et API
 // ============================================================
 async function joinEarlyAccess() {
-  const emailInput = document.getElementById('e1');
-  const successMsg = document.getElementById('ok1');
-  const button = document.getElementById('btn1');
+  var el  = document.getElementById('e1');
+  var s   = document.getElementById('ok1');
+  var btn = document.getElementById('btn1');
 
-  const email = emailInput.value.trim();
+  var email = el.value.trim();
 
   if (!email || !email.includes('@')) {
-    emailInput.style.borderColor = '#F87171';
-    setTimeout(() => { emailInput.style.borderColor = ''; }, 1500);
+    el.style.borderColor = '#F87171';
+    setTimeout(function(){ el.style.borderColor = ''; }, 1500);
     return;
   }
 
-  button.disabled = true;
-  button.textContent = 'Sending…';
+  btn.disabled    = true;
+  btn.textContent = 'Sending…';
 
   try {
-    const response = await fetch('https://api.brevo.com/v3/contacts', {
+    var res = await fetch('https://api.brevo.com/v3/contacts', {
       method: 'POST',
       headers: {
         'accept': 'application/json',
-        'api-key': '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',           // ← METS TA VRAIE CLÉ ICI
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'api-key': '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'
       },
       body: JSON.stringify({
         email: email,
-        listIds: [9],                           // ← METS TON VRAI ID DE LISTE ICI
+        listIds: [9],
         updateEnabled: true
       })
     });
 
-    if (response.ok) {
-      successMsg.style.display = 'block';
-      emailInput.value = '';
-      emailInput.placeholder = 'Thank you!';
-      button.textContent = '✓ Done';
+    if (res.ok || res.status === 204) {
+      s.style.display = 'block';
+      el.value        = '';
+      el.placeholder  = 'Thank you!';
+      btn.textContent = '✓ Done';
     } else {
-      const errText = await response.text();
-      console.error('Brevo error:', errText);
-      throw new Error('API failed');
+      throw new Error('error');
     }
-  } catch (err) {
-    console.error(err);
-    emailInput.style.borderColor = '#F87171';
-    setTimeout(() => { emailInput.style.borderColor = ''; }, 1500);
-    button.textContent = 'Get Early Access';
-    button.disabled = false;
+  } catch(e) {
+    el.style.borderColor = '#F87171';
+    setTimeout(function(){ el.style.borderColor = ''; }, 1500);
+    btn.disabled    = false;
+    btn.textContent = 'Get Early Access';
   }
 }
 </script>
