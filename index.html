@@ -26,13 +26,12 @@
   .hero-sub strong{color:#CBD5E1;font-weight:600}
   .form-wrap{width:100%;max-width:470px;display:flex;flex-direction:column;align-items:center;gap:.7rem}
   .input-row{display:flex;width:100%;gap:.6rem}
-  .input-row input{flex:1;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:10px;padding:.82rem 1.1rem;color:#fff;font-size:.9rem;font-family:'Inter',sans-serif;outline:none;transition:border-color .2s}
-  .input-row input::placeholder{color:var(--muted)}
-  .input-row input:focus{border-color:rgba(59,130,246,.6)}
+  .input-row input[type="email"]{flex:1;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:10px;padding:.82rem 1.1rem;color:#fff;font-size:.9rem;font-family:'Inter',sans-serif;outline:none;transition:border-color .2s}
+  .input-row input[type="email"]::placeholder{color:var(--muted)}
+  .input-row input[type="email"]:focus{border-color:rgba(59,130,246,.6)}
   .btn{background:var(--blue);border:none;border-radius:10px;padding:.82rem 1.4rem;color:#fff;font-size:.9rem;font-weight:700;cursor:pointer;white-space:nowrap;font-family:'Inter',sans-serif;transition:background .2s,transform .15s,box-shadow .2s;box-shadow:0 0 28px rgba(59,130,246,.35)}
   .btn:hover{background:var(--blue-dark);transform:translateY(-2px);box-shadow:0 0 40px rgba(59,130,246,.5)}
   .form-note{font-size:.73rem;color:var(--muted)}
-  .success{display:none;font-size:.83rem;color:#6EE7B7;font-weight:600}
   hr{border:none;border-top:1px solid var(--border)}
   .stats{display:flex;justify-content:center;flex-wrap:wrap;border-bottom:1px solid var(--border)}
   .stat{flex:1;min-width:130px;padding:1.8rem 1rem;text-align:center;border-right:1px solid var(--border)}
@@ -115,10 +114,9 @@
   <div class="form-wrap">
     <div class="input-row">
       <input type="email" id="e1" placeholder="your@email.com" />
-      <button class="btn" id="btn1" onclick="joinEarlyAccess()">Get Early Access</button>
+      <button class="btn" onclick="join()">Get Early Access</button>
     </div>
     <p class="form-note">Free to join. Be the first to know when we launch.</p>
-    <p class="success" id="ok1">You're on the list. We'll reach out first.</p>
   </div>
 </section>
 
@@ -322,55 +320,16 @@
 
 <script>
 // ============================================================
-// Brevo API — List ID: 9
-// REMPLACE "TA_NOUVELLE_CLE_BREVO" par ta vraie clé API Brevo
-// générée sur app.brevo.com > Paramètres > SMTP et API
+// Aucun service externe — redirige simplement vers thank-you.html
 // ============================================================
-async function joinEarlyAccess() {
-  var el  = document.getElementById('e1');
-  var s   = document.getElementById('ok1');
-  var btn = document.getElementById('btn1');
-
-  var email = el.value.trim();
-
-  if (!email || !email.includes('@')) {
+function join() {
+  var el = document.getElementById('e1');
+  if (!el.value.trim() || !el.value.includes('@')) {
     el.style.borderColor = '#F87171';
     setTimeout(function(){ el.style.borderColor = ''; }, 1500);
     return;
   }
-
-  btn.disabled    = true;
-  btn.textContent = 'Sending…';
-
-  try {
-    var res = await fetch('https://api.brevo.com/v3/contacts', {
-      method: 'POST',
-      headers: {
-        'accept': 'application/json',
-        'content-type': 'application/json',
-        'api-key': 'TA_NOUVELLE_CLE_BREVO'
-      },
-      body: JSON.stringify({
-        email: email,
-        listIds: [9],
-        updateEnabled: true
-      })
-    });
-
-    if (res.ok || res.status === 204) {
-      s.style.display = 'block';
-      el.value        = '';
-      el.placeholder  = 'Thank you!';
-      btn.textContent = '✓ Done';
-    } else {
-      throw new Error('error');
-    }
-  } catch(e) {
-    el.style.borderColor = '#F87171';
-    setTimeout(function(){ el.style.borderColor = ''; }, 1500);
-    btn.disabled    = false;
-    btn.textContent = 'Get Early Access';
-  }
+  window.location.href = 'thank-you.html';
 }
 </script>
 </body>
