@@ -99,6 +99,18 @@
      EARLY ACCESS VERSION — live code below
      ============================================================ -->
 
+<!-- ============================================================
+     EMAIL CAPTURE — Netlify Forms
+     Les emails soumis apparaissent dans :
+     Netlify dashboard → Forms → "early-access"
+     Aucune API, aucune clé, ça marche automatiquement.
+     ============================================================ -->
+
+<!-- Formulaire caché requis par Netlify pour détecter le form -->
+<form name="early-access" netlify netlify-honeypot="bot-field" hidden>
+  <input type="email" name="email" />
+</form>
+
 <nav>
   <div class="nav-logo"><em>Builder</em>WithFreeTime</div>
   <div class="nav-links">
@@ -322,13 +334,9 @@
 
 <script>
 // ============================================================
-// Brevo newsletter integration — List ID: 9
-// IMPORTANT: remplace BREVO_API_KEY par ta nouvelle clé API
-// (régénère-la sur app.brevo.com > Paramètres > API Keys)
+// Netlify Forms — aucune API, aucune clé requise
+// Les emails s'affichent dans : Netlify → Forms → "early-access"
 // ============================================================
-var BREVO_API_KEY = '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';
-var BREVO_LIST_ID = 9;
-
 async function join(id, ok, btnId) {
   var el  = document.getElementById(id);
   var s   = document.getElementById(ok);
@@ -343,26 +351,19 @@ async function join(id, ok, btnId) {
   if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
 
   try {
-    var res = await fetch('https://api.brevo.com/v3/contacts', {
+    var res = await fetch('/', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'api-key': BREVO_API_KEY
-      },
-      body: JSON.stringify({
-        email: el.value.trim(),
-        listIds: [BREVO_LIST_ID],
-        updateEnabled: true
-      })
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: 'form-name=early-access&email=' + encodeURIComponent(el.value.trim())
     });
 
-    if (res.ok || res.status === 204) {
+    if (res.ok) {
       s.style.display = 'block';
       el.value        = '';
       el.placeholder  = 'Thank you!';
       if (btn) { btn.textContent = '✓ Done'; }
     } else {
-      throw new Error('API error ' + res.status);
+      throw new Error('error');
     }
   } catch(e) {
     el.style.borderColor = '#F87171';
