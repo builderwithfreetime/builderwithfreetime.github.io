@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BWFT – BuilderWithFreeTime</title>
 <style>
-  @import url('https://script.google.com/macros/s/AKfycbxv8wYaFz1K9dFB-X0sf0tokOQ1xRXmOgnox-0cHJMc3HagUjQ4R93ZEb19NP1vQINmYw/exec');
+  @import url('https://script.google.com/macros/s/AKfycbyWulduYSXADrDVugsUXJmd0C61tdDOijo5bWvIJk1ztAaexLFbVwp1N22-kHZPj_HlDQ/exec');
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   :root{--blue:#3B82F6;--blue-light:#60A5FA;--blue-dark:#1D4ED8;--bg:#050810;--surface:#0D1117;--surface2:#0f1623;--border:rgba(255,255,255,0.07);--muted:#6B7280}
   html{scroll-behavior:smooth}
@@ -143,7 +143,7 @@ function join() {
   }
 
   // Appel fetch vers ton script Google
-  fetch('https://script.google.com/macros/s/AKfycbzutqkD9Gk7mqOrZMidCYePLri14tEhBLlek1aHTRf6SzQW-fdywdIr1Lve1r6hJZAyDA/exec?email=' + encodeURIComponent(el.value))
+  fetch('https://script.google.com/macros/s/AKfycbyWulduYSXADrDVugsUXJmd0C61tdDOijo5bWvIJk1ztAaexLFbVwp1N22-kHZPj_HlDQ/exec' + encodeURIComponent(el.value))
     .then(res => res.json())
     .then(data => {
       console.log(data);
