@@ -4,99 +4,194 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BWFT – BuilderWithFreeTime</title>
+
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  :root{--blue:#3B82F6;--blue-light:#60A5FA;--blue-dark:#1D4ED8;--bg:#050810;--surface:#0D1117;--surface2:#0f1623;--border:rgba(255,255,255,0.07);--muted:#6B7280}
-  html{scroll-behavior:smooth}
-  body{font-family:'Inter',sans-serif;background:var(--bg);color:#F9FAFB;overflow-x:hidden}
-  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 6%;height:64px;background:rgba(5,8,16,0.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
-  .nav-logo{font-size:.98rem;font-weight:800}.nav-logo em{color:var(--blue-light);font-style:normal}
-  .nav-links{display:flex;gap:2rem}
-  .nav-links a{color:var(--muted);text-decoration:none;font-size:.84rem;font-weight:500;transition:color .2s}
-  .nav-links a:hover{color:#fff}
-  .nav-pill{background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.3);color:var(--blue-light);font-size:.7rem;font-weight:700;padding:.28rem .8rem;border-radius:50px;letter-spacing:.5px;text-transform:uppercase}
-  .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:90px 6% 60px;position:relative;overflow:hidden}
-  .hero::before{content:'';position:absolute;top:-150px;left:50%;transform:translateX(-50%);width:800px;height:800px;background:radial-gradient(circle,rgba(59,130,246,0.13) 0%,transparent 68%);pointer-events:none}
-  .eyebrow{font-size:.7rem;font-weight:700;color:var(--blue-light);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:1.5rem;display:flex;align-items:center;gap:.5rem}
-  .dot{width:6px;height:6px;border-radius:50%;background:var(--blue-light);animation:blink 1.8s infinite}
-  @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-  .hero h1{font-size:clamp(2.8rem,6.5vw,5rem);font-weight:900;line-height:1.04;letter-spacing:-2.5px;max-width:820px;background:linear-gradient(140deg,#fff 45%,#93C5FD);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-  .hero-sub{font-size:clamp(.93rem,1.8vw,1.1rem);color:var(--muted);margin:1.4rem 0 2.8rem;max-width:500px;line-height:1.75}
-  .hero-sub strong{color:#CBD5E1;font-weight:600}
-  .form-wrap{width:100%;max-width:470px;display:flex;flex-direction:column;align-items:center;gap:.7rem}
-  .input-row{display:flex;width:100%;gap:.6rem}
-  .input-row input[type="email"]{flex:1;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:10px;padding:.82rem 1.1rem;color:#fff;font-size:.9rem;font-family:'Inter',sans-serif;outline:none;transition:border-color .2s}
-  .input-row input[type="email"]::placeholder{color:var(--muted)}
-  .input-row input[type="email"]:focus{border-color:rgba(59,130,246,.6)}
-  .btn{background:var(--blue);border:none;border-radius:10px;padding:.82rem 1.4rem;color:#fff;font-size:.9rem;font-weight:700;cursor:pointer;white-space:nowrap;font-family:'Inter',sans-serif;transition:background .2s,transform .15s,box-shadow .2s;box-shadow:0 0 28px rgba(59,130,246,.35)}
-  .btn:hover{background:var(--blue-dark);transform:translateY(-2px);box-shadow:0 0 40px rgba(59,130,246,.5)}
-  .form-note{font-size:.73rem;color:var(--muted)}
-  hr{border:none;border-top:1px solid var(--border)}
-  .stats{display:flex;justify-content:center;flex-wrap:wrap;border-bottom:1px solid var(--border)}
-  .stat{flex:1;min-width:130px;padding:1.8rem 1rem;text-align:center;border-right:1px solid var(--border)}
-  .stat:last-child{border-right:none}
-  .stat-val{font-size:1.7rem;font-weight:900;color:var(--blue-light);letter-spacing:-1px}
-  .stat-label{font-size:.72rem;color:var(--muted);margin-top:.25rem;text-transform:uppercase;letter-spacing:.6px}
-  .sec{padding:80px 6%}
-  .sec.alt{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-  .lbl{font-size:.68rem;font-weight:700;color:var(--blue-light);letter-spacing:2px;text-transform:uppercase;text-align:center;margin-bottom:.8rem}
-  .ttl{font-size:clamp(1.7rem,3.5vw,2.5rem);font-weight:900;letter-spacing:-1px;line-height:1.1;text-align:center;max-width:640px;margin:0 auto 1rem}
-  .sub{color:var(--muted);font-size:.92rem;line-height:1.75;text-align:center;max-width:460px;margin:0 auto 3.5rem}
-  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;max-width:1100px;margin:0 auto}
-  .card{background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:1.8rem 1.4rem;transition:border-color .25s,transform .25s}
-  .card:hover{border-color:rgba(59,130,246,.35);transform:translateY(-3px)}
-  .card-n{font-size:.68rem;font-weight:800;color:var(--blue-light);letter-spacing:1px;text-transform:uppercase;margin-bottom:.9rem}
-  .card h3{font-size:.93rem;font-weight:700;margin-bottom:.5rem}
-  .card p{font-size:.82rem;color:var(--muted);line-height:1.6}
-  .split{display:flex;gap:4rem;align-items:center;flex-wrap:wrap;max-width:1000px;margin:0 auto}
-  .split-t{flex:1;min-width:260px}
-  .split-t h2{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;letter-spacing:-1px;line-height:1.15;margin-bottom:1rem}
-  .split-t p{color:var(--muted);font-size:.9rem;line-height:1.8;margin-bottom:1.4rem}
-  .clist{list-style:none;display:flex;flex-direction:column;gap:.65rem}
-  .clist li{display:flex;gap:.7rem;font-size:.86rem;line-height:1.5;align-items:flex-start}
-  .clist li::before{content:'—';color:var(--blue-light);font-weight:700;flex-shrink:0}
-  .lb{flex:1;min-width:230px;max-width:290px;background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:1.4rem}
-  .lb-head{font-size:.68rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:1rem;display:flex;justify-content:space-between}
-  .lb-head span:last-child{color:var(--blue-light)}
-  .lb-row{display:flex;align-items:center;gap:.65rem;padding:.52rem 0;border-bottom:1px solid var(--border)}
-  .lb-row:last-child{border-bottom:none}
-  .lb-r{font-size:.7rem;font-weight:800;width:14px;color:var(--muted)}
-  .lb-r.g{color:#F59E0B}.lb-r.s{color:#9CA3AF}.lb-r.b{color:#D97706}
-  .lb-av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800;flex-shrink:0}
-  .lb-name{flex:1;font-size:.8rem;font-weight:600}
-  .lb-xp{font-size:.73rem;font-weight:700;color:var(--blue-light)}
-  /* pricing styles kept for post-early-access version */
-  .plans{display:flex;justify-content:center;gap:1.2rem;flex-wrap:wrap;max-width:760px;margin:0 auto}
-  .plan{background:var(--surface2);border:1px solid var(--border);border-radius:16px;padding:2.2rem 1.8rem;flex:1;min-width:230px;max-width:330px;position:relative}
-  .plan.hot{border-color:var(--blue);box-shadow:0 0 36px rgba(59,130,246,.18)}
-  .hot-tag{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--blue);color:#fff;font-size:.67rem;font-weight:700;padding:.27rem .85rem;border-radius:50px;white-space:nowrap}
-  .plan-name{font-size:.7rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:.65rem}
-  .plan-price{font-size:2.5rem;font-weight:900;letter-spacing:-1px}
-  .plan-price span{font-size:.88rem;color:var(--muted);font-weight:400}
-  .plan-desc{color:var(--muted);font-size:.82rem;margin:.65rem 0 1.5rem;line-height:1.6}
-  .plan-list{list-style:none;display:flex;flex-direction:column;gap:.55rem;margin-bottom:1.6rem}
-  .plan-list li{display:flex;gap:.6rem;font-size:.83rem}
-  .pbtn{width:100%;padding:.8rem;border-radius:9px;font-size:.86rem;font-weight:700;cursor:pointer;border:none;font-family:'Inter',sans-serif;transition:all .2s}
-  .pbtn.ghost{background:transparent;border:1px solid var(--border);color:#fff}
-  .pbtn.ghost:hover{border-color:var(--blue);color:var(--blue-light)}
-  .pbtn.solid{background:var(--blue);color:#fff;box-shadow:0 0 20px rgba(59,130,246,.35)}
-  .pbtn.solid:hover{background:var(--blue-dark);transform:translateY(-1px)}
-  footer{border-top:1px solid var(--border);padding:2.2rem 6%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
-  .f-brand{font-size:.88rem;font-weight:800;color:var(--blue-light)}
-  .f-links{display:flex;gap:1.6rem}
-  .f-links a{color:var(--muted);text-decoration:none;font-size:.8rem;transition:color .2s}
-  .f-links a:hover{color:#fff}
-  .copy{width:100%;text-align:center;color:var(--muted);font-size:.74rem;padding-top:1.2rem;border-top:1px solid var(--border)}
-  @media(max-width:900px){.grid4{grid-template-columns:repeat(2,1fr)}}
-  @media(max-width:680px){.nav-links{display:none}.input-row{flex-direction:column}.btn{width:100%}.split{flex-direction:column}.lb{max-width:100%;width:100%}footer{flex-direction:column;text-align:center}.f-links{justify-content:center}.grid4{grid-template-columns:1fr}}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+--blue:#3B82F6;
+--blue-light:#60A5FA;
+--blue-dark:#1D4ED8;
+--bg:#050810;
+--surface:#0D1117;
+--surface2:#0f1623;
+--border:rgba(255,255,255,0.07);
+--muted:#6B7280;
+--success:#10B981;
+--error:#F87171;
+}
+
+html{scroll-behavior:smooth}
+body{
+font-family:'Inter',sans-serif;
+background:var(--bg);
+color:#F9FAFB;
+overflow-x:hidden;
+}
+
+nav{
+position:fixed;
+top:0;left:0;right:0;
+z-index:100;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 6%;
+height:64px;
+background:rgba(5,8,16,0.9);
+backdrop-filter:blur(16px);
+border-bottom:1px solid var(--border)
+}
+
+.nav-logo{font-size:.98rem;font-weight:800}
+.nav-logo em{color:var(--blue-light);font-style:normal}
+
+.nav-links{display:flex;gap:2rem}
+.nav-links a{
+color:var(--muted);
+text-decoration:none;
+font-size:.84rem;
+font-weight:500;
+transition:color .2s
+}
+.nav-links a:hover{color:#fff}
+
+.nav-pill{
+background:rgba(59,130,246,0.15);
+border:1px solid rgba(59,130,246,0.3);
+color:var(--blue-light);
+font-size:.7rem;
+font-weight:700;
+padding:.28rem .8rem;
+border-radius:50px;
+letter-spacing:.5px;
+text-transform:uppercase
+}
+
+.hero{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:90px 6% 60px;
+position:relative;
+}
+
+.hero::before{
+content:'';
+position:absolute;
+top:-150px;
+left:50%;
+transform:translateX(-50%);
+width:800px;height:800px;
+background:radial-gradient(circle,rgba(59,130,246,0.13) 0%,transparent 68%);
+pointer-events:none
+}
+
+.hero h1{
+font-size:clamp(2.8rem,6.5vw,5rem);
+font-weight:900;
+line-height:1.04;
+letter-spacing:-2.5px;
+max-width:820px;
+background:linear-gradient(140deg,#fff 45%,#93C5FD);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.hero-sub{
+font-size:clamp(.93rem,1.8vw,1.1rem);
+color:var(--muted);
+margin:1.4rem 0 2.8rem;
+max-width:500px;
+line-height:1.75
+}
+
+.form-wrap{
+width:100%;
+max-width:470px;
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:.7rem
+}
+
+.input-row{
+display:flex;
+width:100%;
+gap:.6rem
+}
+
+.input-row input{
+flex:1;
+background:rgba(255,255,255,0.05);
+border:1px solid var(--border);
+border-radius:10px;
+padding:.82rem 1.1rem;
+color:#fff;
+font-size:.9rem;
+outline:none;
+transition:border .2s,box-shadow .2s
+}
+
+.input-row input:focus{
+border-color:rgba(59,130,246,.6);
+box-shadow:0 0 0 2px rgba(59,130,246,.2)
+}
+
+.btn{
+background:var(--blue);
+border:none;
+border-radius:10px;
+padding:.82rem 1.4rem;
+color:#fff;
+font-size:.9rem;
+font-weight:700;
+cursor:pointer;
+transition:all .2s;
+box-shadow:0 0 28px rgba(59,130,246,.35)
+}
+
+.btn:hover{
+background:var(--blue-dark);
+transform:translateY(-2px)
+}
+
+.btn.loading{
+opacity:.7;
+cursor:not-allowed
+}
+
+.message{
+font-size:.8rem;
+margin-top:.5rem;
+min-height:20px;
+transition:opacity .3s
+}
+
+.success{color:var(--success)}
+.error{color:var(--error)}
+
+footer{
+border-top:1px solid var(--border);
+padding:2rem;
+text-align:center;
+color:var(--muted);
+margin-top:100px
+}
+
+@media(max-width:680px){
+.nav-links{display:none}
+.input-row{flex-direction:column}
+.btn{width:100%}
+}
 </style>
 </head>
-<body>
 
-<!-- ============================================================
-     EARLY ACCESS VERSION — live code below
-     ============================================================ -->
+<body>
 
 <nav>
   <div class="nav-logo"><em>Builder</em>WithFreeTime</div>
@@ -108,230 +203,72 @@
 </nav>
 
 <section class="hero">
-  <div class="eyebrow"><span class="dot"></span>Limited Early Access</div>
   <h1>Stop procrastinating.<br>Start building.</h1>
-  <p class="hero-sub">BWFT turns entrepreneurship into an <strong>addictive game</strong>. AI-guided micro-actions, XP, and leaderboards — all from your phone.</p>
+  <p class="hero-sub">
+    BWFT turns entrepreneurship into an addictive game.
+  </p>
+
   <div class="form-wrap">
     <div class="input-row">
-      <input type="email" id="e1" placeholder="your@email.com" />
-      <button class="btn" onclick="join()">Get Early Access</button>
+      <input type="email" id="emailInput" placeholder="your@email.com" />
+      <button class="btn" id="submitBtn">Get Early Access</button>
     </div>
-    <p class="form-note">Free to join. Be the first to know when we launch.</p>
-  </div>
-</section>
-  
-
-<hr>
-
-<div class="stats">
-  <div class="stat"><div class="stat-val">2 min</div><div class="stat-label">Per action</div></div>
-  <div class="stat"><div class="stat-val">XP</div><div class="stat-label">Gamified progress</div></div>
-  <div class="stat"><div class="stat-val">100%</div><div class="stat-label">Mobile-first</div></div>
-  <div class="stat"><div class="stat-val">AI</div><div class="stat-label">Personal coach</div></div>
-</div>
-
-<section class="sec" id="how">
-  <p class="lbl">Process</p>
-  <h2 class="ttl">From zero to entrepreneur in 4 steps</h2>
-  <p class="sub">A custom AI-generated roadmap tailored to your goals, executable in minutes a day.</p>
-  <div class="grid4">
-    <div class="card"><div class="card-n">Step 01</div><h3>Define your goals</h3><p>Answer a few key questions. Your entrepreneur profile is ready in 5 minutes.</p></div>
-    <div class="card"><div class="card-n">Step 02</div><h3>AI builds your plan</h3><p>A step-by-step program to create and grow your business, week by week.</p></div>
-    <div class="card"><div class="card-n">Step 03</div><h3>Complete micro-actions</h3><p>2-minute tasks designed to eliminate mental friction. No excuse not to start.</p></div>
-    <div class="card"><div class="card-n">Step 04</div><h3>Earn XP, climb the board</h3><p>Every action earns XP. Unlock features, badges, and competitive advantages.</p></div>
-  </div>
-</section>
-
-<section class="sec alt" id="features">
-  <p class="lbl">Features</p>
-  <h2 class="ttl">Built to kill procrastination.</h2>
-  <p class="sub">Everything you need to launch — designed for builders under 30.</p>
-  <div class="grid4">
-    <div class="card"><h3>Gamification</h3><p>XP, levels, badges, streaks. Every action counts. Productivity as addictive as a video game.</p></div>
-    <div class="card"><h3>AI Chat Coach</h3><p>Your personal assistant creates a full launch program — from idea to promotion. Always available.</p></div>
-    <div class="card"><h3>Mobile-first</h3><p>Android, iOS, and Web. Build your company on your commute or between classes.</p></div>
-    <div class="card"><h3>TOP 20 Leaderboard</h3><p>Top 20 earn XP x2. Bottom of the board gets XP /2 but receives special boosts to climb back.</p></div>
-    <div class="card"><h3>Progressive unlocks</h3><p>Accumulate XP to unlock advanced AI features. Progress rewards action.</p></div>
-    <div class="card"><h3>Full roadmap</h3><p>Creation, development, promotion — all covered. From the first idea to the first customer.</p></div>
-    <div class="card"><h3>Anti-perfectionism</h3><p>Done beats perfect. The app pushes you to ship fast, iterate, and keep momentum going.</p></div>
-    <div class="card"><h3>Community</h3><p>Connect with other builders, share wins, stay accountable. You are not building alone.</p></div>
-  </div>
-</section>
-
-<section class="sec" id="leaderboard">
-  <div class="split">
-    <div class="split-t">
-      <p class="lbl" style="text-align:left;margin-bottom:.7rem">Competition</p>
-      <h2>Procrastination has no chance against competition.</h2>
-      <p>The real-time leaderboard pushes you to act. The best builders double their XP. Stragglers get special help to catch up.</p>
-      <ul class="clist">
-        <li>TOP 20 — x2 multiplier on all XP earned</li>
-        <li>Bottom of the board — XP /2 but boosts offered to climb back</li>
-        <li>Exclusive badges at each XP milestone</li>
-        <li>New AI features unlocked as XP accumulates</li>
-      </ul>
-    </div>
-    <div class="lb">
-      <div class="lb-head"><span>Top Builders</span><span>x2 XP</span></div>
-      <div class="lb-row"><div class="lb-r g">1</div><div class="lb-av" style="background:#7C3AED">AT</div><div class="lb-name">Alex T.</div><div class="lb-xp">12,480 XP</div></div>
-      <div class="lb-row"><div class="lb-r s">2</div><div class="lb-av" style="background:#059669">ML</div><div class="lb-name">Marie L.</div><div class="lb-xp">9,210 XP</div></div>
-      <div class="lb-row"><div class="lb-r b">3</div><div class="lb-av" style="background:#DC2626">JR</div><div class="lb-name">Jules R.</div><div class="lb-xp">7,650 XP</div></div>
-      <div class="lb-row"><div class="lb-r">4</div><div class="lb-av" style="background:#3B82F6">SB</div><div class="lb-name">Sofia B.</div><div class="lb-xp">5,900 XP</div></div>
-      <div style="text-align:center;padding-top:.9rem;font-size:.73rem;color:var(--muted)">Your rank after sign-up: <span style="color:var(--blue-light);font-weight:700">#?</span></div>
-    </div>
+    <div id="formMessage" class="message"></div>
   </div>
 </section>
 
 <footer>
-  <div class="f-brand">BuilderWithFreeTime</div>
-  <div class="f-links"><a href="#">Home</a><a href="#">About</a><a href="#">Privacy</a><a href="#">Contact</a></div>
-  <div class="copy">2026 BuilderWithFreeTime (BWFT) — Stop procrastinating. Start building.</div>
+  2026 BuilderWithFreeTime (BWFT) — Stop procrastinating. Start building.
 </footer>
-
-<!-- ============================================================
-     POST-EARLY-ACCESS VERSION
-     When launching the full app:
-     1. Delete everything above this comment block (from <nav> to </footer>)
-     2. Uncomment the code below (remove the opening and closing comment tags)
-     ============================================================
-
-<nav>
-  <div class="nav-logo"><em>Builder</em>WithFreeTime</div>
-  <div class="nav-links">
-    <a href="#how">How it works</a>
-    <a href="#features">Features</a>
-    <a href="#pricing">Pricing</a>
-  </div>
-  <button class="btn" style="font-size:.8rem;padding:.5rem 1.1rem" onclick="window.location='#download'">Get Started</button>
-</nav>
-
-<section class="hero">
-  <div class="eyebrow"><span class="dot"></span>Now Available</div>
-  <h1>Stop procrastinating.<br>Start building.</h1>
-  <p class="hero-sub">BWFT turns entrepreneurship into an <strong>addictive game</strong>. AI-guided micro-actions, XP, and leaderboards — all from your phone.</p>
-  <div style="display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center">
-    <button class="btn">Download on iOS</button>
-    <button class="btn" style="background:transparent;border:1px solid rgba(59,130,246,.4);box-shadow:none">Get on Android</button>
-  </div>
-  <p style="font-size:.73rem;color:var(--muted);margin-top:.9rem">Also available on Web — no install needed.</p>
-</section>
-
-<hr>
-
-<div class="stats">
-  <div class="stat"><div class="stat-val">2 min</div><div class="stat-label">Per action</div></div>
-  <div class="stat"><div class="stat-val">XP</div><div class="stat-label">Gamified progress</div></div>
-  <div class="stat"><div class="stat-val">100%</div><div class="stat-label">Mobile-first</div></div>
-  <div class="stat"><div class="stat-val">AI</div><div class="stat-label">Personal coach</div></div>
-</div>
-
-<section class="sec" id="how">
-  <p class="lbl">Process</p>
-  <h2 class="ttl">From zero to entrepreneur in 4 steps</h2>
-  <p class="sub">A custom AI-generated roadmap tailored to your goals, executable in minutes a day.</p>
-  <div class="grid4">
-    <div class="card"><div class="card-n">Step 01</div><h3>Define your goals</h3><p>Answer a few key questions. Your entrepreneur profile is ready in 5 minutes.</p></div>
-    <div class="card"><div class="card-n">Step 02</div><h3>AI builds your plan</h3><p>A step-by-step program to create and grow your business, week by week.</p></div>
-    <div class="card"><div class="card-n">Step 03</div><h3>Complete micro-actions</h3><p>2-minute tasks designed to eliminate mental friction. No excuse not to start.</p></div>
-    <div class="card"><div class="card-n">Step 04</div><h3>Earn XP, climb the board</h3><p>Every action earns XP. Unlock features, badges, and competitive advantages.</p></div>
-  </div>
-</section>
-
-<section class="sec alt" id="features">
-  <p class="lbl">Features</p>
-  <h2 class="ttl">Built to kill procrastination.</h2>
-  <p class="sub">Everything you need to launch — designed for builders under 30.</p>
-  <div class="grid4">
-    <div class="card"><h3>Gamification</h3><p>XP, levels, badges, streaks. Every action counts. Productivity as addictive as a video game.</p></div>
-    <div class="card"><h3>AI Chat Coach</h3><p>Your personal assistant creates a full launch program — from idea to promotion. Always available.</p></div>
-    <div class="card"><h3>Mobile-first</h3><p>Android, iOS, and Web. Build your company on your commute or between classes.</p></div>
-    <div class="card"><h3>TOP 20 Leaderboard</h3><p>Top 20 earn XP x2. Bottom of the board gets XP /2 but receives special boosts to climb back.</p></div>
-    <div class="card"><h3>Progressive unlocks</h3><p>Accumulate XP to unlock advanced AI features. Progress rewards action.</p></div>
-    <div class="card"><h3>Full roadmap</h3><p>Creation, development, promotion — all covered. From the first idea to the first customer.</p></div>
-    <div class="card"><h3>Anti-perfectionism</h3><p>Done beats perfect. The app pushes you to ship fast, iterate, and keep momentum going.</p></div>
-    <div class="card"><h3>Community</h3><p>Connect with other builders, share wins, stay accountable. You are not building alone.</p></div>
-  </div>
-</section>
-
-<section class="sec" id="leaderboard">
-  <div class="split">
-    <div class="split-t">
-      <p class="lbl" style="text-align:left;margin-bottom:.7rem">Competition</p>
-      <h2>Procrastination has no chance against competition.</h2>
-      <p>The real-time leaderboard pushes you to act. The best builders double their XP. Stragglers get special help to catch up.</p>
-      <ul class="clist">
-        <li>TOP 20 — x2 multiplier on all XP earned</li>
-        <li>Bottom of the board — XP /2 but boosts offered to climb back</li>
-        <li>Exclusive badges at each XP milestone</li>
-        <li>New AI features unlocked as XP accumulates</li>
-      </ul>
-    </div>
-    <div class="lb">
-      <div class="lb-head"><span>Top Builders</span><span>x2 XP</span></div>
-      <div class="lb-row"><div class="lb-r g">1</div><div class="lb-av" style="background:#7C3AED">AT</div><div class="lb-name">Alex T.</div><div class="lb-xp">12,480 XP</div></div>
-      <div class="lb-row"><div class="lb-r s">2</div><div class="lb-av" style="background:#059669">ML</div><div class="lb-name">Marie L.</div><div class="lb-xp">9,210 XP</div></div>
-      <div class="lb-row"><div class="lb-r b">3</div><div class="lb-av" style="background:#DC2626">JR</div><div class="lb-name">Jules R.</div><div class="lb-xp">7,650 XP</div></div>
-      <div class="lb-row"><div class="lb-r">4</div><div class="lb-av" style="background:#3B82F6">SB</div><div class="lb-name">Sofia B.</div><div class="lb-xp">5,900 XP</div></div>
-    </div>
-  </div>
-</section>
-
-<section class="sec alt" id="pricing">
-  <p class="lbl">Pricing</p>
-  <h2 class="ttl">Start free. Scale when ready.</h2>
-  <p class="sub">Available on Android, Apple, and Web. No excuse not to start.</p>
-  <div class="plans">
-    <div class="plan">
-      <div class="plan-name">Freemium</div>
-      <div class="plan-price">$0 <span>/ forever</span></div>
-      <p class="plan-desc">Get started with no risk.</p>
-      <ul class="plan-list">
-        <li><span>+</span>Basic AI program</li>
-        <li><span>+</span>Micro-actions &amp; XP</li>
-        <li><span>+</span>Global leaderboard</li>
-        <li><span style="color:var(--muted)">-</span><span style="color:var(--muted)">Unlimited AI chat</span></li>
-        <li><span style="color:var(--muted)">-</span><span style="color:var(--muted)">Advanced features</span></li>
-      </ul>
-      <button class="pbtn ghost">Download for free</button>
-    </div>
-    <div class="plan hot">
-      <div class="hot-tag">Recommended</div>
-      <div class="plan-name">Premium</div>
-      <div class="plan-price">$6.99 <span>/ month</span></div>
-      <p class="plan-desc">Launch, grow, and dominate the leaderboard.</p>
-      <ul class="plan-list">
-        <li><span>+</span>Everything in Free</li>
-        <li><span>+</span>Unlimited AI chat</li>
-        <li><span>+</span>Full personalized program</li>
-        <li><span>+</span>Exclusive badges &amp; rewards</li>
-        <li><span>+</span>XP boosts available</li>
-      </ul>
-      <button class="pbtn solid">Get Premium</button>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="f-brand">BuilderWithFreeTime</div>
-  <div class="f-links"><a href="#">Home</a><a href="#">About</a><a href="#">Pricing</a><a href="#">Privacy</a><a href="#">Contact</a></div>
-  <div class="copy">2026 BuilderWithFreeTime (BWFT) — Stop procrastinating. Start building.</div>
-</footer>
-
--->
 
 <script>
-// ============================================================
-// Aucun service externe — redirige simplement vers thank-you.html
-// ============================================================
-function join() {
-  var el = document.getElementById('e1');
-  if (!el.value.trim() || !el.value.includes('@')) {
-    el.style.borderColor = '#F87171';
-    setTimeout(function(){ el.style.borderColor = ''; }, 1500);
+const scriptURL = "https://script.google.com/macros/s/AKfycbywvPrTNHrL4ZEGYju-cCJSs9hQUIe3gLrhrvhjWP1QUBoVWIbUVXAYWqA4Tp_PXu8bTA/exec";
+
+const emailInput = document.getElementById("emailInput");
+const submitBtn = document.getElementById("submitBtn");
+const message = document.getElementById("formMessage");
+
+function validateEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+submitBtn.addEventListener("click", async () => {
+
+  const email = emailInput.value.trim();
+
+  if (!validateEmail(email)) {
+    message.textContent = "Please enter a valid email.";
+    message.className = "message error";
+    emailInput.style.borderColor = "var(--error)";
     return;
   }
-  window.location.href = 'acknoledgements';
-}
+
+  submitBtn.classList.add("loading");
+  submitBtn.textContent = "Submitting...";
+  message.textContent = "";
+
+  try {
+    await fetch(scriptURL, {
+      method: "POST",
+      mode: "no-cors",
+      body: new URLSearchParams({ email: email })
+    });
+
+    message.textContent = "You're on the list 🚀";
+    message.className = "message success";
+
+    setTimeout(() => {
+      window.location.href = "acknoledgements";
+    }, 1200);
+
+  } catch (error) {
+    message.textContent = "Something went wrong. Try again.";
+    message.className = "message error";
+    submitBtn.classList.remove("loading");
+    submitBtn.textContent = "Get Early Access";
+  }
+});
 </script>
+
 </body>
 </html>
