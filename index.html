@@ -197,12 +197,14 @@
     errorMsg.style.display = 'none';
 
     try {
-      await fetch(SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: email })
-      });
+      const formData = new FormData();
+formData.append('email', email);
+
+await fetch(SCRIPT_URL, {
+  method: 'POST',
+  mode: 'no-cors',
+  body: formData
+});
 
       // no-cors = on ne peut pas lire la réponse, mais si pas d'erreur réseau = succès
       emailInput.value = '';
